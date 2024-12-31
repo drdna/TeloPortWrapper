@@ -106,7 +106,7 @@ python3 DeNovoTelomereMiner.py [-h] [-s S S] [-i I] -g G [-d D] [-t T] [-f [F ..
 
 ```--add [ADD ...]```: List all addition seqeunces files you want compared to the reads. This adds in additional files which the raw reads will compared to via BLAST. All must be in fasta format.You can list any number of files.
 
-```--cut CUT```: The number of reads in a cluster before it is labeled a canidate de-novo. The default is five.
+```--cut CUT```: The number of reads in a cluster before it is labeled a candidate de-novo telomere. The default is five.
 
 ```--simple```: Activates Simple mode, a step by step interactive input mode.
 
