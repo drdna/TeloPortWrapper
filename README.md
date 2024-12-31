@@ -15,7 +15,7 @@ https://digitalcommons.wku.edu/stu_hon_theses/999
 
 # DeNovoTelomereMiner Quick Start
 
-DeNovoTelomereMiner is built for POSIX systems and has been tested on Fedora, Ubuntu, and macOS 15. For an easy install try the new [docker](https://www.docker.com/get-started/) option which works on Linux, macOS (Intel and ARM), and Windows. This image should also work with Podman. For Windows users, try [Windows Subsystem Linux](https://learn.microsoft.com/en-us/windows/wsl/install) offered by Microsoft. It has been tested on Python version 13.1. It is recommended to install dependencies via [Homebrew](https://brew.sh/) or [Conda](https://docs.anaconda.com/miniconda/install/), both of which are package managers on macOS and Linux. Instructions for installation are included on the project’s homepages.
+DeNovoTelomereMiner is built for POSIX systems and has been tested on Fedora, Ubuntu, and macOS 15. For an easy installation, try the new [docker](https://www.docker.com/get-started/) option which works on Linux, macOS (Intel and ARM), and Windows. This image should also work with Podman. For Windows users, try [Windows Subsystem Linux](https://learn.microsoft.com/en-us/windows/wsl/install) offered by Microsoft. It has been tested on Python version 13.1. It is recommended to install dependencies via [Homebrew](https://brew.sh/) or [Conda](https://docs.anaconda.com/miniconda/install/), both of which are package managers on macOS and Linux. Instructions for installation are included on the project’s homepages.
 
 # **Dependencies**
 
@@ -32,7 +32,7 @@ Python 3.8 or greater
 [Emboss 6.6.0](http://emboss.sourceforge.net/download/)
 
 ## Docker instructions for Linux, macOS and Windows
-1. Pull the image from Github
+1. Pull the docker image from Github
 ```bash
 docker pull ghcr.io/trstans606/denovotelomereminer:latest@sha256:de0aa441ac86115cc55dd6577bf2d73b5afb7ec12d1b10102fb60a1d9767af98
 ```
@@ -58,7 +58,7 @@ The image also comes equiped with wget and the NCBI sra-toolkit to easily add da
 
 ### Using Podman
 
-This image should also work using Podman on Linux but testing is first and foremost done with Docker.
+This image should also work using Podman on Linux but testing was first and foremost done with Docker.
 
 1. Pull the image from Github
 ```bash
@@ -70,7 +70,7 @@ podman pull ghcr.io/trstans606/denovotelomereminer:latest
 podman run --name de_novos -it 82b6ad51a816 bash
 ```
 
-Everything else should be the same with podman just make sure you use the appropriate Podman command for file copying.
+Everything else should be the same with podman just make sure you use the appropriate podman command for file copying.
 
 ## Building Docker from Source
 
@@ -96,25 +96,25 @@ python3 DeNovoTelomereMiner.py [-h] [-s S S] [-i I] -g G [-d D] [-t T] [-f [F ..
 
 ```-i I```: The interleaved raw read FASTQ file. This option is mutually exclusive with -s.
 
-```-g G```: The name of the assembled genome FASTA file used for alignment. If simple mode is not used, options -g are required.
+```-g G```: The name of the assembled genome FASTA file used for alignment. If simple mode is not used, option -g is required.
 
-```-d D```: The name of the directory where all output files will be placed. The name defaults to the name of the fasta file provided. Directory names must be unique and must not already exist.
+```-d D```: The name of the directory where all output files will be placed. The name defaults to the prefix of the provided fastq raw reads file(s). Directory names must be unique and must not already exist.
 
-```-t T```: The foreward tel repeat you want to search for. Default is CCCTAA.
+```-t T```: The forward telomere repeat sequence you want to search for. Default is CCCTAA.
 
-```-f [F ...]```: List all of the seqeunce files you want removed from reads. This actively removes some sequences from anaylsis. Must be in fasta format. You can list any number of files.
+```-f [F ...]```: List all of the sequence files you want removed from reads. This actively removes some sequences from anaylsis. Must be in fasta format. You can list any number of files.
 
-```--add [ADD ...]```: List all addition seqeunces files you want compared to the reads. This adds in additional files which the raw reads will compared to via BLAST. All must be in fasta format.You can list any number of files.
+```--add [ADD ...]```: List the paths to additional genome sequence files against which you want to align the candidate de-novo telomeres. You can list any number of files but all must be in fasta format.
 
-```--cut CUT```: The number of reads in a cluster before it is labeled a canidate de-novo. The default is five.
+```--cut CUT```: The number of reads in a cluster before it is labeled a candidate de-novo telomere. The default is five.
 
-```--simple```: Activates Simple mode, a step by step interactive input mode.
+```--simple```: Activates Simple mode, a step-by-step interactive input mode.
 
-```--config```: Allows the user to interactively alter the config file.
+```--config```: Allows the user to alter the config file interactively.
 
 ### DeNovoTelomereMiner Sample Command
 
-This command is assuming your raw read files are in Files/ and your genome is in testData/.
+This command assumes your raw read files are in Files/ and your genome is in testData/.
 
 ```bash
 python3 DeNovoTelomereMiner.py -s ERR2061621_1.fastq ERR2061621_2.fastq -g B71v2sh.fasta -d ERR2061621
@@ -144,6 +144,6 @@ addDirectory=Files/
 These file paths can be absolute or relavtive but the path must exist and must not have any spaces before the equal sign and the file path, so:
 
 ```readDirectory=/home/usr/Downloads/Genomes``` is okay but:
-```readDirectory= /home/usr/Downloads/Genomes``` isn't as there is a space between the equals sign and path.
+```readDirectory= /home/usr/Downloads/Genomes``` fails because there is a space between the "=" sign and the file path.
 
 
